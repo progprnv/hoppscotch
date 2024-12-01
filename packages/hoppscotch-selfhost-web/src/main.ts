@@ -5,6 +5,7 @@ import { def as collectionsDef } from "./platform/collections/collections.platfo
 import { def as settingsDef } from "./platform/settings/settings.platform"
 import { def as historyDef } from "./platform/history/history.platform"
 import { browserInterceptor } from "@hoppscotch/common/platform/std/interceptors/browser"
+import { NativeInterceptorService } from "@hoppscotch/common/platform/std/interceptors/native"
 import { proxyInterceptor } from "@hoppscotch/common/platform/std/interceptors/proxy"
 import { ExtensionInspectorService } from "@hoppscotch/common/platform/std/inspections/extension.inspector"
 import { ExtensionInterceptorService } from "@hoppscotch/common/platform/std/interceptors/extension"
@@ -14,8 +15,12 @@ import { stdSupportOptionItems } from "@hoppscotch/common/platform/std/ui/suppor
 import { browserIODef } from "@hoppscotch/common/platform/std/io"
 import { InfraPlatform } from "@platform/infra/infra.platform"
 
+
 import { getKernelMode } from "@hoppscotch/kernel"
+import { NativeKernelInterceptorService } from "@hoppscotch/common/platform/std/kernel-interceptors/native"
+import { BrowserKernelInterceptorService } from "@hoppscotch/common/platform/std/kernel-interceptors/browser"
 import { kernelIO } from "@hoppscotch/common/platform/std/kernel-io"
+
 createHoppApp("#app", {
   ui: {
     additionalFooterMenuItems: stdFooterItems,
@@ -31,13 +36,22 @@ createHoppApp("#app", {
     settings: settingsDef,
     history: historyDef,
   },
+  // NOTE: To be deprecated
   interceptors: {
     default: "browser",
     interceptors: [
       { type: "standalone", interceptor: browserInterceptor },
       { type: "standalone", interceptor: proxyInterceptor },
+      { type: "service", service: NativeInterceptorService },
       { type: "service", service: ExtensionInterceptorService },
       { type: "service", service: AgentInterceptorService },
+    ],
+  },
+  kernelInterceptors: {
+    default: getKernelMode() == "desktop" ? "native" : "browser",
+    interceptors: [
+      { type: "service", service: NativeKernelInterceptorService },
+      { type: "service", service: BrowserKernelInterceptorService },
     ],
   },
   additionalInspectors: [
