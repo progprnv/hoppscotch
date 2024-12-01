@@ -947,6 +947,9 @@ importers:
       '@tauri-apps/plugin-shell':
         specifier: ^2
         version: 2.0.0
+      '@tauri-apps/plugin-store':
+        specifier: 2.1.0
+        version: 2.1.0
       '@vueuse/core':
         specifier: 11.1.0
         version: 11.1.0(vue@3.5.12(typescript@5.6.3))
@@ -956,9 +959,9 @@ importers:
       vue:
         specifier: 3.5.12
         version: 3.5.12(typescript@5.6.3)
-      vue-tippy:
-        specifier: 6.5.0
-        version: 6.5.0(vue@3.5.12(typescript@5.6.3))
+      vue-router:
+        specifier: 4.4.5
+        version: 4.4.5(vue@3.5.12(typescript@5.6.3))
     devDependencies:
       '@iconify-json/lucide':
         specifier: 1.2.10
@@ -5133,6 +5136,9 @@ packages:
 
   '@tauri-apps/plugin-shell@2.0.0':
     resolution: {integrity: sha512-OpW2+ycgJLrEoZityWeWYk+6ZWP9VyiAfbO+N/O8VfLkqyOym8kXh7odKDfINx9RAotkSGBtQM4abyKfJDkcUg==}
+
+  '@tauri-apps/plugin-store@2.1.0':
+    resolution: {integrity: sha512-GADqrc17opUKYIAKnGHIUgEeTZ2wJGu1ZITKQ1WMuOFdv8fvXRFBAqsqPjE3opgWohbczX6e1NpwmZK1AnuWVw==}
 
   '@trysound/sax@0.2.0':
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -9648,9 +9654,6 @@ packages:
 
   mlly@1.7.0:
     resolution: {integrity: sha512-U9SDaXGEREBYQgfejV97coK0UL1r+qnF2SyO9A3qcI8MzKnsIFKHNVEkrDyNncQTKQQumsasmeq84eNMdBfsNQ==}
-
-  mlly@1.7.1:
-    resolution: {integrity: sha512-rrVRZRELyQzrIUAVMHxP97kv+G786pHmOKzuFII8zDYahFBS7qnHh2AlYSl1GAHhaMPCz6/oHjVMcfFYgFYHgA==}
 
   mlly@1.7.2:
     resolution: {integrity: sha512-tN3dvVHYVz4DhSXinXIk7u9syPYaJvio118uomkovAtWBT+RdbP6Lfh/5Lvo519YMmwBafwlh20IPTXIStscpA==}
@@ -15916,7 +15919,7 @@ snapshots:
       debug: 4.3.7
       kolorist: 1.8.0
       local-pkg: 0.5.0
-      mlly: 1.7.1
+      mlly: 1.7.2
     transitivePeerDependencies:
       - supports-color
 
@@ -17140,6 +17143,10 @@ snapshots:
       '@tauri-apps/cli-win32-x64-msvc': 2.0.4
 
   '@tauri-apps/plugin-shell@2.0.0':
+    dependencies:
+      '@tauri-apps/api': 2.0.2
+
+  '@tauri-apps/plugin-store@2.1.0':
     dependencies:
       '@tauri-apps/api': 2.0.2
 
@@ -23519,13 +23526,6 @@ snapshots:
       pkg-types: 1.2.1
       ufo: 1.5.4
 
-  mlly@1.7.1:
-    dependencies:
-      acorn: 8.12.1
-      pathe: 1.1.2
-      pkg-types: 1.2.1
-      ufo: 1.5.4
-
   mlly@1.7.2:
     dependencies:
       acorn: 8.12.1
@@ -24179,14 +24179,6 @@ snapshots:
       postcss: 8.4.47
       ts-node: 10.9.2(@swc/core@1.4.2)(@types/node@22.7.6)(typescript@5.3.3)
 
-  postcss-load-config@4.0.2(postcss@8.4.47)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.7.6)(typescript@5.6.3)):
-    dependencies:
-      lilconfig: 3.1.2
-      yaml: 2.4.2
-    optionalDependencies:
-      postcss: 8.4.47
-      ts-node: 10.9.2(@swc/core@1.4.2)(@types/node@22.7.6)(typescript@5.6.3)
-
   postcss-load-config@4.0.2(postcss@8.4.49)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@18.18.8)(typescript@4.9.5)):
     dependencies:
       lilconfig: 3.1.2
@@ -24194,6 +24186,22 @@ snapshots:
     optionalDependencies:
       postcss: 8.4.49
       ts-node: 10.9.2(@swc/core@1.4.2)(@types/node@18.18.8)(typescript@4.9.5)
+
+  postcss-load-config@4.0.2(postcss@8.4.49)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.7.6)(typescript@5.3.3)):
+    dependencies:
+      lilconfig: 3.1.2
+      yaml: 2.4.2
+    optionalDependencies:
+      postcss: 8.4.49
+      ts-node: 10.9.2(@swc/core@1.4.2)(@types/node@22.7.6)(typescript@5.3.3)
+
+  postcss-load-config@4.0.2(postcss@8.4.49)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.7.6)(typescript@5.6.3)):
+    dependencies:
+      lilconfig: 3.1.2
+      yaml: 2.4.2
+    optionalDependencies:
+      postcss: 8.4.49
+      ts-node: 10.9.2(@swc/core@1.4.2)(@types/node@22.7.6)(typescript@5.6.3)
 
   postcss-load-config@6.0.1(jiti@2.3.3)(postcss@8.4.49)(yaml@2.5.1):
     dependencies:
@@ -25584,11 +25592,11 @@ snapshots:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.1.0
-      postcss: 8.4.47
-      postcss-import: 15.1.0(postcss@8.4.47)
-      postcss-js: 4.0.1(postcss@8.4.47)
-      postcss-load-config: 4.0.2(postcss@8.4.47)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.7.6)(typescript@5.3.3))
-      postcss-nested: 6.0.1(postcss@8.4.47)
+      postcss: 8.4.49
+      postcss-import: 15.1.0(postcss@8.4.49)
+      postcss-js: 4.0.1(postcss@8.4.49)
+      postcss-load-config: 4.0.2(postcss@8.4.49)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.7.6)(typescript@5.3.3))
+      postcss-nested: 6.0.1(postcss@8.4.49)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.8
       sucrase: 3.35.0
@@ -25611,11 +25619,11 @@ snapshots:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.1.0
-      postcss: 8.4.47
-      postcss-import: 15.1.0(postcss@8.4.47)
-      postcss-js: 4.0.1(postcss@8.4.47)
-      postcss-load-config: 4.0.2(postcss@8.4.47)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.7.6)(typescript@5.6.3))
-      postcss-nested: 6.0.1(postcss@8.4.47)
+      postcss: 8.4.49
+      postcss-import: 15.1.0(postcss@8.4.49)
+      postcss-js: 4.0.1(postcss@8.4.49)
+      postcss-load-config: 4.0.2(postcss@8.4.49)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.7.6)(typescript@5.6.3))
+      postcss-nested: 6.0.1(postcss@8.4.49)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.8
       sucrase: 3.35.0
